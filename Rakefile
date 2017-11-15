@@ -5,3 +5,10 @@ desc 'starts a console'
 task :console do
   Pry.start
 end
+
+
+# desc 'seeds that database'
+#  task :migrate do
+#
+#
+#  end
