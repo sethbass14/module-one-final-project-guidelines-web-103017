@@ -1,6 +1,6 @@
 require 'pry'
 
-class Adapter
+class Adapter < ActiveRecord::Base
 
   attr_reader :all_data
 
@@ -31,9 +31,6 @@ class Adapter
   def master
     @all_data.flatten
   end
-
-  binding.pry
-
 end
 
 
