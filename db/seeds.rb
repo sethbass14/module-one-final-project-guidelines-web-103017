@@ -1,5 +1,6 @@
 
 require 'pry'
+require_relative '../config/environment.rb'
 
 
 a = Adapter.new
@@ -7,19 +8,17 @@ a = Adapter.new
 def seed(array)
   array.each do |show_hash|
     date_year = show_hash["eventDate"]
-    #Need to add find_or_create_by below
-    year = date_year.split("-").last
-
-    #add find or creat by below
-    show = date_year
-    #add finde or create by below
-    venue = show_hash["venue"]["name"]
+    year = Year.find_or_create_by(year: date_year.split("-").last.to_i)
+    show = Show.find_or_create_by(date: date_year)
+    year.shows << show
+    venue = Venue.find_or_create_by(name: show_hash["venue"]["name"])
+    venue.shows << show
     show_hash["sets"]["set"].each do |set_hash|
-      #This is an array below
       set_hash['song'].each do |song_hash|
-        #add find or create by below
-        song = song_hash["name"]
-        binding.pry
+        song = Song.find_or_create_by(name: song_hash["name"])
+        #This associaton looks good
+        ShowSong.create(show_id: show.id, song_id: song.id)
+
       end
     end
 
@@ -41,7 +40,7 @@ def seed(array)
   #
 end
 seed(a.all_data)
-binding.pry
+
 # def collect_years
 #   self.all_data.collect do |show_hash|
 #     event_date = show_hash["eventDate"]
