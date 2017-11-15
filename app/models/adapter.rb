@@ -1,6 +1,6 @@
 require 'pry'
 
-class Adapter < ActiveRecord::Base
+class Adapter
 
   attr_reader :all_data
 
@@ -25,15 +25,27 @@ class Adapter < ActiveRecord::Base
       page = 1
       year += 1
     end
-
+    @all_data.flatten!
   end
 
-  def master
-    @all_data.flatten
+  def collect_years
+    self.all_data.collect do |show_hash|
+      event_date = show_hash["eventDate"]
+      event_date.split("-")[-1]
+    end.uniq
   end
+
+  def collect_shows
+    self.all_data.collect do |show_hash|
+      show_hash["eventDate"]
+    end.uniq
+  end
+
+  # def collect_songs
+  #   self.all_data.collect do |show_hash|
+  #     song = show_hash["eventDate"]
+  #     event_date.split("-")[-1]
+  #   end.uniq
+  # end
+
 end
-
-
-# [ {:artist => }
-#
-# ]
