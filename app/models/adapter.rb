@@ -27,25 +27,4 @@ class Adapter
     end
     @all_data.flatten!
   end
-
-  def collect_years
-    self.all_data.collect do |show_hash|
-      event_date = show_hash["eventDate"]
-      event_date.split("-")[-1]
-    end.uniq
-  end
-
-  def collect_shows
-    self.all_data.collect do |show_hash|
-      show_hash["eventDate"]
-    end.uniq
-  end
-
-  # def collect_songs
-  #   self.all_data.collect do |show_hash|
-  #     song = show_hash["eventDate"]
-  #     event_date.split("-")[-1]
-  #   end.uniq
-  # end
-
 end
