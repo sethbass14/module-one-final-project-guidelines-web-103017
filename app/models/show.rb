@@ -4,4 +4,8 @@ class Show < ActiveRecord::Base
   has_many :show_songs
   has_many :songs, through: :show_songs
 
+  
+
+
+
 end
