@@ -9,6 +9,11 @@
     puts "1. Date"
     puts "2. Location"
     puts "3. Song"
+    input = gets_input
+    case input
+    when "1"
+      date_or_year?
+    end
   end
 
   def gets_input
@@ -30,10 +35,11 @@
   end
 
   def date_or_year?
-    input = gets_input.to_i
-    if input == 1
+    year_date_menu
+    input = gets_input
+    if input == "1"
       find_show_by_date
-    elsif input == 2
+    elsif input == "2"
       find_shows_by_year
       # show = find_show_by_date(input)
       # venue = show.venue
@@ -87,4 +93,10 @@
     sleep(1)
     puts "Music never stopped in #{input}!!"
     find_show_by_date
+  end
+
+
+  def deadsetter
+    welcome
+    main_prompt
   end
