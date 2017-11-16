@@ -142,19 +142,31 @@
     puts "Please enter a venue:"
   end
 
+  def collect_cities
+    City.all.collect{|city| city.name}.sort
+  end
+
   def find_shows_by_city
     city_prompt
     input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
-    city = City.where(name: input).first
-    all_shows = city.venues.collect{|venue| venue.shows}.flatten
-    puts
-    puts "The Dead played in #{input} on these dates:"
-    puts
-    all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.05)}
-    puts
-    sleep(1.5)
-    puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} times."
-    main_prompt
+    if collect_cities.include?(input)
+      city = City.where(name: input).first
+      all_shows = city.venues.collect{|venue| venue.shows}.flatten
+      puts
+      puts "The Dead played in #{input} on these dates:"
+      puts
+      all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.05)}
+      puts
+      sleep(1.5)
+      puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} times."
+      main_prompt
+    else
+      invalid_input
+      puts
+      collect_cities.each{|city| puts city; sleep(0.025)}
+      puts 
+      find_shows_by_city
+    end
   end
 
   def find_shows_by_venue
