@@ -20,9 +20,10 @@ class Deadsetter
   end
 
   def date_or_year?
-    input = gets_input
+    input = gets_input.to_s
     if input.length == 10
       # call find_show_by_date method
+      find_show_by_date(input)
     elsif input.length == 4
       # call find_shows_by_year method
     else
@@ -30,5 +31,8 @@ class Deadsetter
     end
   end
 
-  
+  def find_show_by_date(date)
+    Show.where(date: date)
+  end
+
 end

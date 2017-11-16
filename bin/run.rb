@@ -1,3 +1,4 @@
 require_relative '../config/environment'
 
-  # Deadsetter.new.date_or_year?
+user = Deadsetter.new
+user.date_or_year?
