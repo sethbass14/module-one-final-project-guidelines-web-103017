@@ -4,23 +4,36 @@
     puts
     puts "At anytime you can enter 'q' to quit our psychedelic application. We take a break a 4:20 everday, so don't feel bad to dip out!"
     puts
+    sleep(0.5)
+    puts "At anytime you can enter 'm' to return home to the menu. Going home, going home, by the menu prompt, we will rest our bones."
     sleep(2)
+  end
+
+  def invalid_input
+    sleep(1)
+    puts
+    puts "Whoooooa. Bummer. Your input is like way invalid. Please enter a heady input that flows with our vibes. You can always press enter 'q' to quit on Jerr Bear."
+    puts
+    sleep(1)
   end
 
   def main_prompt
     puts
-    puts "How would like to search this heady collection? Please enter 1-3:"
+    puts "Here is our a menu. We call it 'Terrapin Station.' How would like to search this heady collection? Please enter 1-3:"
     puts "1. Date"
     puts "2. Location"
     puts "3. Song"
     input = gets_input
     case input
-    when "1"
-      date_or_year?
-    when "2"
-      city_or_venue?
-    when "3"
-      find_shows_by_song
+      when "1"
+        date_or_year?
+      when "2"
+        city_or_venue?
+      when "3"
+        find_shows_by_song
+      else
+        invalid_input
+        main_prompt
     end
   end
 
@@ -29,6 +42,8 @@
     if input.downcase == 'q'
       exit_message
       exit
+    elsif input.downcase == 'm'
+      main_prompt
     else
       input
     end
@@ -56,7 +71,7 @@
     elsif input == "2"
       find_shows_by_year
     else
-      puts "Whoooooa. Bummer. Your input is like way invalid. Please enter a heady input that flows with our vibes. You can always press enter 'q' to quit on Jerr Bear."
+      invalid_input
       sleep(2)
       date_or_year?
     end
@@ -112,7 +127,8 @@
     elsif input == "2"
       find_shows_by_venue
     else
-      puts "WE FUCKED UP!!"
+      invalid_input
+      city_or_venue?
       # call invalid_input method
     end
   end
