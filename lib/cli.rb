@@ -30,7 +30,7 @@
   end
 
   def date_or_year?
-    input = gets_input
+    input = gets_input.to_i
     if input == 1
       find_show_by_date
     elsif input == 2
@@ -46,18 +46,19 @@
       # set.each {|song| puts song; sleep(0.5)}
       # sleep(1)
       # puts "Ahhhh, I can hear the music play!"
-    elsif input.length == 4
+    # elsif input.length == 4
       # call find_shows_by_year method
-      find_shows_by_year(input)
+      # find_shows_by_year(input)
     else
+      puts "WE FUCKED UP!!"
       # call invalid_input method
     end
   end
 
   def find_show_by_date
-    year_prompt
+    date_prompt
     date = gets_input
-    show = Show.where(date: date)
+    show = Show.where(date: date).first
     venue = show.venue
     set = show.songs.collect {|song| song.name }
     puts "On this day in the history of the Grateful Dead, the Dead played #{venue.name} in #{venue.city.name}."
@@ -67,11 +68,23 @@
     sleep(2)
     set.each {|song| puts song; sleep(0.5)}
     sleep(1)
+    puts
     puts "Ahhhh, I can hear the music play!"
   end
 
 
-  def find_shows_by_year(year)
-    year = Year.where(year: year).first
-    year.shows.collect{|show| show.date}
+  def find_shows_by_year
+    year_prompt
+    input = gets_input
+    year = Year.where(year: input).first
+    shows = year.shows.collect{|show| show.date}
+    puts
+    shows.each{|show| puts show}
+    sleep(1)
+    puts
+    puts "WHOOOOOOOOOAAAAAA!!"
+    puts
+    sleep(1)
+    puts "Music never stopped in #{input}!!"
+    find_show_by_date
   end
