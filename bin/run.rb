@@ -1,4 +1,5 @@
 require_relative '../config/environment'
+require_relative '../lib/cli.rb'
 
-user = Deadsetter.new
-user.date_or_year?
+
+date_or_year?
