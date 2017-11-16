@@ -3,6 +3,7 @@
   end
 
   def main_prompt
+    puts
     puts "How would like to search this heady collection? Please enter 1-3:"
     puts "1. Date"
     puts "2. Location"
@@ -27,11 +28,11 @@
   end
 
   def year_prompt
-    puts "Please enter a year (YYYY)"
+    puts "Please enter a year (YYYY):"
   end
 
   def date_prompt
-    puts "Please enter a date (DD-MM-YYYY)"
+    puts "Please enter a date (DD-MM-YYYY):"
   end
 
   def date_or_year?
@@ -81,9 +82,10 @@
   end
 
   def location_menu
-    puts "What cities the boys play 1977-80? Enter 1!"
-    sleep(1)
+    puts "What cities did the boys play 1977-80? Enter 1!"
+    sleep(0.25)
     puts "Have a favorite venue? Enter 2 to search by venue!!"
+    puts
     puts "1. City"
     puts "2. Venue"
   end
@@ -105,12 +107,30 @@
     puts "Please enter a city:"
   end
 
+  def venue_prompt
+    puts "Please enter a venue:"
+  end
+
   def find_shows_by_city
     city_prompt
     input = gets_input
     city = City.where(name: input).first
     all_shows = city.venues.collect{|venue| venue.shows}.flatten
-    all_shows.each{|show| puts show.date; sleep(0.2)}
+    puts
+    puts "The Dead played in #{input} on these dates:"
+    puts 
+    all_shows.each{|show| puts show.date; sleep(0.15)}
+  end
+
+  def find_shows_by_venue
+    venue_prompt
+    input = gets_input
+    venue = Venue.where(name: input).first
+    all_shows = venue.shows.collect{|show| show.date}
+    puts
+    puts "The Dead played at the #{input} on these dates:"
+    puts
+    all_shows.each{|show| puts show; sleep(0.15)}
   end
 
   def deadsetter
