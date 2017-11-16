@@ -1,5 +1,10 @@
   def welcome
     puts "Welcome to Deadsetter, your one-stop shop for every Grateful Dead setlist from 1977-80."
+    sleep(1)
+    puts
+    puts "At anytime you can enter 'q' to quit our psychedelic application. We take a break a 4:20 everday, so don't feel bad to dip out!"
+    puts
+    sleep(2)
   end
 
   def main_prompt
@@ -21,6 +26,12 @@
 
   def gets_input
     input = gets.chomp
+    if input.downcase == 'q'
+      exit_message
+      exit
+    else
+      input
+    end
   end
 
   def year_date_menu
@@ -45,8 +56,9 @@
     elsif input == "2"
       find_shows_by_year
     else
-      puts "WE FUCKED UP!!"
-      # call invalid_input method
+      puts "Whoooooa. Bummer. Your input is like way invalid. Please enter a heady input that flows with our vibes. You can always press enter 'q' to quit on Jerr Bear."
+      sleep(2)
+      date_or_year?
     end
   end
 
@@ -150,6 +162,15 @@
     puts "The Dead played #{input} on these dates:"
     puts
     all_shows.each{|show| puts show; sleep(0.05)}
+    puts
+    sleep(1.5)
+    #add in a sentence about how many times this tune was played.
+    puts "Wow, the Dead went IN on that tune!"
+    puts
+  end
+
+  def exit_message
+    puts "Crunchy Dead Heads of the world salute you! Thanks for using Deadsetter! See you next time!"
   end
 
   def deadsetter
