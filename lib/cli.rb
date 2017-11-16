@@ -101,7 +101,7 @@
     year = Year.where(year: input).first
     shows = year.shows.collect{|show| show.date}.sort
     puts
-    shows.each{|show| puts show}
+    shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
     sleep(1)
     puts
     puts "WHOOOOOOOOOAAAAAA!!"
@@ -150,10 +150,10 @@
     puts
     puts "The Dead played in #{input} on these dates:"
     puts
-    all_shows.each{|show| puts show.date; sleep(0.15)}
+    all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.05)}
     puts
     sleep(1.5)
-    puts "Wow #{city.name} LOVES the Dead!"
+    puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} times."
     main_prompt
   end
 
@@ -165,7 +165,7 @@
     puts
     puts "The Dead played at the #{input} on these dates:"
     puts
-    all_shows.each{|show| puts show; sleep(0.15)}
+    all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
     puts
     puts "The Dead played the #{venue.name} #{all_shows.length} times."
     sleep(1.5)
@@ -199,12 +199,12 @@
       last = all_shows.last
       puts
       sleep(1)
-      puts "First time played: #{first.strftime("%B %d %Y")}"
-      puts "Last time played: #{last.strftime("%B %d %Y")}"
+      puts "First time played: #{first.strftime("%B %d, %Y")}"
+      puts "Last time played: #{last.strftime("%B %d, %Y")}"
       puts "#{input} was played #{all_shows.length} times in this period."
       puts
       puts "The Dead played #{input} on these dates:"
-      all_shows.each{|show| puts show.strftime("%B %d %Y"); sleep(0.05)}
+      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
       puts
       sleep(1.5)
       #add in a sentence about how many times this tune was played.
