@@ -164,25 +164,37 @@
       invalid_input
       puts
       collect_cities.each{|city| puts city; sleep(0.025)}
-      puts 
+      puts
       find_shows_by_city
     end
   end
 
+  def collect_venues
+    Venue.all.collect{|venue| venue.name}.sort
+  end
+
   def find_shows_by_venue
     venue_prompt
-    input = gets_input
-    venue = Venue.where(name: input).first
-    all_shows = venue.shows.collect{|show| show.date}
-    puts
-    puts "The Dead played at the #{input} on these dates:"
-    puts
-    all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
-    puts
-    puts "The Dead played the #{venue.name} #{all_shows.length} times."
-    sleep(1.5)
-    puts
-    main_prompt
+    input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
+    if collect_venues.include?(input)
+      venue = Venue.where(name: input).first
+      all_shows = venue.shows.collect{|show| show.date}
+      puts
+      puts "The Dead played at the #{input} on these dates:"
+      puts
+      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
+      puts
+      puts "The Dead played the #{venue.name} #{all_shows.length} times."
+      sleep(1.5)
+      puts
+      main_prompt
+    else
+      invalid_input
+      puts
+      collect_venues.each{|venue| puts venue; sleep(0.025)}
+      puts
+      find_shows_by_venue
+    end
   end
 
   def song_prompt
