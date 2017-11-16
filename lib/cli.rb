@@ -9,6 +9,11 @@
     sleep(2)
   end
 
+  def spaced_out
+    puts "We're too spaced out to read your date, brah."
+    find_shows_by_year
+  end
+
   def invalid_input
     sleep(1)
     puts
@@ -19,7 +24,7 @@
 
   def main_prompt
     puts
-    puts "Here is our a menu. We call it 'Terrapin Station.' How would like to search this heady collection? Please enter 1-3:"
+    puts "Here is our menu. We call it 'Terrapin Station.' How would like to search this heady collection? Please enter 1-3:"
     puts "1. Date"
     puts "2. Location"
     puts "3. Song"
@@ -50,17 +55,20 @@
   end
 
   def year_date_menu
+    puts
     puts "Select '1' if you know what killer show you'd like to look up. Select '2' if you want to browse by far out year!"
     puts "1. Search by Date"
     puts "2. Browse by year"
   end
 
   def year_prompt
-    puts "Please enter a year (YYYY):"
+    puts
+    puts "Please enter a year between 1977 and 1980 (YYYY):"
   end
 
   def date_prompt
-    puts "Please enter a date (DD-MM-YYYY):"
+    puts
+    puts "Please enter a date (month dd, yyyy):"  # (DD-MM-YYYY)
   end
 
   def date_or_year?
@@ -77,41 +85,59 @@
     end
   end
 
+  def collect_dates
+    dates = Show.all.collect{|show| show.date}.sort
+    dates.collect{|date| date.strftime("%B %d, %Y")}
+  end
+
   def find_show_by_date
     date_prompt
     date = gets_input
-    show = Show.where(date: date).first
-    venue = show.venue
-    set = show.songs.collect {|song| song.name }
-    puts "On this day in the history of the Grateful Dead, the Dead played #{venue.name} in #{venue.city.name}."
-    sleep(2)
-    puts
-    puts "Check out this heady setlist:"
-    sleep(2)
-    set.each {|song| puts song; sleep(0.5)}
-    sleep(1)
-    puts
-    puts "Ahhhh, I can hear the music play!"
-    main_prompt
+    if collect_dates.include?(date)
+      show = Show.where(date: date).first
+      venue = show.venue
+      set = show.songs.collect {|song| song.name }
+      puts "On this day in the history of the Grateful Dead, the Dead played #{venue.name} in #{venue.city.name}."
+      sleep(2)
+      puts
+      puts "Check out this heady setlist:"
+      sleep(2)
+      set.each {|song| puts song; sleep(0.25)}
+      sleep(1)
+      puts
+      puts "Ahhhh, I can hear the music play!"
+      main_prompt
+    else
+      spaced_out
+    end
+  end
+
+  def collect_years
+    Year.all.collect{|year| year.year}.sort
   end
 
   def find_shows_by_year
     year_prompt
-    input = gets_input
-    year = Year.where(year: input).first
-    shows = year.shows.collect{|show| show.date}.sort
-    puts
-    shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
-    sleep(1)
-    puts
-    puts "WHOOOOOOOOOAAAAAA!!"
-    puts
-    sleep(1)
-    puts "Music never stopped in #{input}!!"
-    find_show_by_date
+    input = gets_input.to_i
+    if collect_years.include?(input)
+      year = Year.where(year: input).first
+      shows = year.shows.collect{|show| show.date}.sort
+      puts
+      shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
+      sleep(1)
+      puts
+      puts "WHOOOOOOOOOAAAAAA!!"
+      puts
+      sleep(1)
+      puts "Music never stopped in #{input}!!"
+      find_show_by_date
+    else
+      spaced_out
+    end
   end
 
   def location_menu
+    puts
     puts "What cities did the boys play 1977-80? Enter 1!"
     sleep(0.25)
     puts "Have a favorite venue? Enter 2 to search by venue!!"
@@ -147,6 +173,7 @@
   end
 
   def find_shows_by_city
+    puts
     city_prompt
     input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
     if collect_cities.include?(input)
@@ -158,7 +185,7 @@
       all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.05)}
       puts
       sleep(1.5)
-      puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} times."
+      puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} time(s)."
       main_prompt
     else
       invalid_input
@@ -174,6 +201,7 @@
   end
 
   def find_shows_by_venue
+    puts
     venue_prompt
     input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
     if collect_venues.include?(input)
@@ -213,6 +241,7 @@
   end
 
   def find_shows_by_song
+    puts
     song_prompt
     user_input = gets_input
     input = make_title(user_input)
@@ -223,15 +252,15 @@
       last = all_shows.last
       puts
       sleep(1)
-      puts "First time played: #{first.strftime("%B %d, %Y")}"
-      puts "Last time played: #{last.strftime("%B %d, %Y")}"
-      puts "#{input} was played #{all_shows.length} times in this period."
       puts
       puts "The Dead played #{input} on these dates:"
       all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
       puts
+      puts "First time played: #{first.strftime("%B %d, %Y")}"
+      puts "Last time played: #{last.strftime("%B %d, %Y")}"
+      puts "#{input} was played #{all_shows.length} times in this period."
       sleep(1.5)
-      #add in a sentence about how many times this tune was played.
+      puts
       puts "Wow, the Dead went IN on that tune!"
       main_prompt
     else
