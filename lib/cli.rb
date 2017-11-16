@@ -12,7 +12,7 @@
   def invalid_input
     sleep(1)
     puts
-    puts "Whoooooa. Bummer. Your input is like way invalid. Please enter a heady input that flows with our vibes. You can always press enter 'q' to quit on Jerr Bear."
+    puts "Whoooooa. Bummer. Your input is like way invalid. Please enter a heady input that flows with our vibes. You can always press enter 'q' to quit on Jerr Bear or 'm' to go back to the main menu."
     puts
     sleep(1)
   end
@@ -164,28 +164,62 @@
   end
 
   def song_prompt
-    puts "Please enter a Dead song:"
+    puts "Please enter a Dead song. Which one? Any one! They are all groovy!"
+  end
+
+  def all_song_names
+    Song.all.collect {|song| song.name}
+  end
+
+  def make_title(title)
+    lowercase = %w{a an the for and nor but ot yet so at around by after along for from of on to with without}
+    string = title.split(' ').collect {|word| lowercase.include?(word.downcase) ? word.downcase : word.capitalize}.join(" ")
+    string[0].upcase
+    string
   end
 
   def find_shows_by_song
     song_prompt
-    input = gets_input
-    song = Song.where(name: input).first
-    all_shows = song.shows.collect{|show| show.date}
-    puts
-    puts "#{input} was played #{all_shows.length} times in this period."
-    puts
-    puts "The Dead played #{input} on these dates:"
-    puts
-    all_shows.each{|show| puts show; sleep(0.05)}
-    puts
-    sleep(1.5)
-    #add in a sentence about how many times this tune was played.
-    puts "Wow, the Dead went IN on that tune!"
-    puts
+    user_input = gets_input
+    input = make_title(user_input)
+    if all_song_names.include?(input)
+      song = Song.where(name: input).first
+      all_shows = song.shows.collect{|show| show.date}
+      puts
+      puts "#{input} was played #{all_shows.length} times in this period."
+      puts
+      puts "The Dead played #{input} on these dates:"
+      puts
+      all_shows.each{|show| puts show; sleep(0.05)}
+      puts
+      sleep(1.5)
+      #add in a sentence about how many times this tune was played.
+      puts "Wow, the Dead went IN on that tune!"
+      puts
+    else
+      invalid_input
+      puts "Here is the master list of songs to choose from!"
+      puts
+      sleep(1)
+      puts "Wait for it...."
+      puts
+      sleep(1)
+      puts "Wait for it...."
+      puts
+      sleep(2)
+      puts "BOOM!"
+      puts
+      all_song_names.sort.each {|song| puts song; sleep(0.05)}
+      puts
+      sleep(1)
+      find_shows_by_song
+
+    end
   end
 
   def exit_message
+    puts
+    sleep(0.5)
     puts "Crunchy Dead Heads of the world salute you! Thanks for using Deadsetter! See you next time!"
   end
 
