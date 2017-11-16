@@ -11,6 +11,8 @@
     case input
     when "1"
       date_or_year?
+    when "2"
+      city_or_venue?
     end
   end
 
@@ -78,6 +80,38 @@
     find_show_by_date
   end
 
+  def location_menu
+    puts "What cities the boys play 1977-80? Enter 1!"
+    sleep(1)
+    puts "Have a favorite venue? Enter 2 to search by venue!!"
+    puts "1. City"
+    puts "2. Venue"
+  end
+
+  def city_or_venue?
+    location_menu
+    input = gets_input
+    if input == "1"
+      find_shows_by_city
+    elsif input == "2"
+      find_shows_by_venue
+    else
+      puts "WE FUCKED UP!!"
+      # call invalid_input method
+    end
+  end
+
+  def city_prompt
+    puts "Please enter a city:"
+  end
+
+  def find_shows_by_city
+    city_prompt
+    input = gets_input
+    city = City.where(name: input).first
+    all_shows = city.venues.collect{|venue| venue.shows}.flatten
+    all_shows.each{|show| puts show.date; sleep(0.2)}
+  end
 
   def deadsetter
     welcome
