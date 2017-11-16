@@ -14,6 +14,8 @@
       date_or_year?
     when "2"
       city_or_venue?
+    when "3"
+      find_shows_by_song
     end
   end
 
@@ -118,7 +120,7 @@
     all_shows = city.venues.collect{|venue| venue.shows}.flatten
     puts
     puts "The Dead played in #{input} on these dates:"
-    puts 
+    puts
     all_shows.each{|show| puts show.date; sleep(0.15)}
   end
 
@@ -131,6 +133,23 @@
     puts "The Dead played at the #{input} on these dates:"
     puts
     all_shows.each{|show| puts show; sleep(0.15)}
+  end
+
+  def song_prompt
+    puts "Please enter a Dead song:"
+  end
+
+  def find_shows_by_song
+    song_prompt
+    input = gets_input
+    song = Song.where(name: input).first
+    all_shows = song.shows.collect{|show| show.date}
+    puts
+    puts "#{input} was played #{all_shows.length} times in this period."
+    puts
+    puts "The Dead played #{input} on these dates:"
+    puts
+    all_shows.each{|show| puts show; sleep(0.05)}
   end
 
   def deadsetter
