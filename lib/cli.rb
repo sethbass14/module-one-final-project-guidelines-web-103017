@@ -92,6 +92,7 @@
     sleep(1)
     puts
     puts "Ahhhh, I can hear the music play!"
+    main_prompt
   end
 
   def find_shows_by_year
@@ -150,6 +151,10 @@
     puts "The Dead played in #{input} on these dates:"
     puts
     all_shows.each{|show| puts show.date; sleep(0.15)}
+    puts
+    sleep(1.5)
+    puts "Wow #{city.name} LOVES the Dead!"
+    main_prompt
   end
 
   def find_shows_by_venue
@@ -161,6 +166,11 @@
     puts "The Dead played at the #{input} on these dates:"
     puts
     all_shows.each{|show| puts show; sleep(0.15)}
+    puts
+    puts "The Dead played the #{venue.name} #{all_shows.length} times."
+    sleep(1.5)
+    puts
+    main_prompt
   end
 
   def song_prompt
@@ -199,7 +209,7 @@
       sleep(1.5)
       #add in a sentence about how many times this tune was played.
       puts "Wow, the Dead went IN on that tune!"
-      puts
+      main_prompt
     else
       invalid_input
       puts "Here is the master list of songs to choose from!"
