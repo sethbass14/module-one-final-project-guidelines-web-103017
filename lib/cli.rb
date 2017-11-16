@@ -127,7 +127,7 @@
 
   def find_shows_by_city
     city_prompt
-    input = gets_input
+    input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
     city = City.where(name: input).first
     all_shows = city.venues.collect{|venue| venue.shows}.flatten
     puts
