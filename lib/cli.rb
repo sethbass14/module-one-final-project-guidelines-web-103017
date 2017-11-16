@@ -98,7 +98,7 @@
     year_prompt
     input = gets_input
     year = Year.where(year: input).first
-    shows = year.shows.collect{|show| show.date}
+    shows = year.shows.collect{|show| show.date}.sort
     puts
     shows.each{|show| puts show}
     sleep(1)
@@ -184,13 +184,17 @@
     input = make_title(user_input)
     if all_song_names.include?(input)
       song = Song.where(name: input).first
-      all_shows = song.shows.collect{|show| show.date}
+      all_shows = song.shows.collect{|show| show.date}.sort
+      first = all_shows.first
+      last = all_shows.last
       puts
+      sleep(1)
+      puts "First time played: #{first.strftime("%B %d %Y")}"
+      puts "Last time played: #{last.strftime("%B %d %Y")}"
       puts "#{input} was played #{all_shows.length} times in this period."
       puts
       puts "The Dead played #{input} on these dates:"
-      puts
-      all_shows.each{|show| puts show; sleep(0.05)}
+      all_shows.each{|show| puts show.strftime("%B %d %Y"); sleep(0.05)}
       puts
       sleep(1.5)
       #add in a sentence about how many times this tune was played.
@@ -213,7 +217,6 @@
       puts
       sleep(1)
       find_shows_by_song
-
     end
   end
 
