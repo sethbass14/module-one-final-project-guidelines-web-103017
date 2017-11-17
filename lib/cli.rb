@@ -130,7 +130,7 @@
       puts "WHOOOOOOOOOAAAAAA!!"
       puts
       sleep(1)
-      puts "Music never stopped in #{input}!!"
+      puts "Music never stopped in #{input}!! The Dead played #{shows.length} times."
       find_show_by_date
     else
       spaced_out
@@ -373,7 +373,7 @@
     graph
     graphic.each_line {|line| puts line; sleep(0.05)}
     # puts graphic
-    sleep(2)
+    sleep(1)
   end
 
   def deadsetter
