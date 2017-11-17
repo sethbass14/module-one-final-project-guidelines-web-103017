@@ -1,4 +1,5 @@
   def welcome
+    graphic
     puts "Welcome to Deadsetter, your one-stop shop for every Grateful Dead setlist from 1965-1995."
     sleep(1)
     puts
@@ -275,8 +276,9 @@
       puts
       sleep(2)
       puts "BOOM!"
+      sleep (2)
       puts
-      all_song_names.sort.each {|song| puts song; sleep(0.05)}
+      all_song_names.sort.each {|song| puts song; sleep(0.01)}
       puts
       sleep(1)
       find_shows_by_song
@@ -287,6 +289,25 @@
     puts
     sleep(0.5)
     puts "Crunchy Dead Heads of the world salute you! Thanks for using Deadsetter! See you next time!"
+    graphic
+    puts
+  end
+
+  def graphic
+    graphic = <<-graph
+
+ ______   _______  _______  ______   _______  _______ __________________ _______  _______
+(  __  \\ (  ____ \\(  ___  )(  __  \\ (  ____ \\(  ____ \\\\__   __/\\\\__   __/(  ____ \\(  ____ )
+| (  \\  )| (    \\/| (   ) || (  \\  )| (    \\/| (    \\/   ) (      ) (   | (    \\/| (    )|
+| |   ) || (__    | (___) || |   ) || (_____ | (__       | |      | |   | (__    | (____)|
+| |   | ||  __)   |  ___  || |   | |(_____  )|  __)      | |      | |   |  __)   |     __)
+| |   ) || (      | (   ) || |   ) |      ) || (         | |      | |   | (      | (\\ (
+| (__/  )| (____/\\| )   ( || (__/  )/\\____) || (____/\\   | |      | |   | (____/\\| ) \\ \\__
+(______/ (_______/|/     \\|(______/ \\_______)(_______/   )_(      )_(   (_______/|/   \\__/
+
+
+    graph
+    puts graphic
   end
 
   def deadsetter
