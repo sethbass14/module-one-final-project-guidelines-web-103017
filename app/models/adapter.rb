@@ -7,8 +7,8 @@ class Adapter
   def initialize
     @all_data = []
 
-    year = 77
-    year_limit = 81
+    year = 65
+    year_limit = 96
 
     until year == year_limit
       page = 1

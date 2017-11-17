@@ -1,5 +1,5 @@
   def welcome
-    puts "Welcome to Deadsetter, your one-stop shop for every Grateful Dead setlist from 1977-80."
+    puts "Welcome to Deadsetter, your one-stop shop for every Grateful Dead setlist from 1965-1995."
     sleep(1)
     puts
     puts "At anytime you can enter 'q' to quit our psychedelic application. We take a break a 4:20 everday, so don't feel bad to dip out!"
@@ -63,7 +63,7 @@
 
   def year_prompt
     puts
-    puts "Please enter a year between 1977 and 1980 (YYYY):"
+    puts "Please enter a year between 1965 and 1995 (YYYY):"
   end
 
   def date_prompt
@@ -102,7 +102,7 @@
       puts
       puts "Check out this heady setlist:"
       sleep(2)
-      set.each {|song| puts song; sleep(0.25)}
+      set.each {|song| puts song; sleep(0.2)}
       sleep(1)
       puts
       puts "Ahhhh, I can hear the music play!"
@@ -123,7 +123,7 @@
       year = Year.where(year: input).first
       shows = year.shows.collect{|show| show.date}.sort
       puts
-      shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
+      shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.01)}
       sleep(1)
       puts
       puts "WHOOOOOOOOOAAAAAA!!"
@@ -138,7 +138,7 @@
 
   def location_menu
     puts
-    puts "What cities did the boys play 1977-80? Enter 1!"
+    puts "What cities did the boys play? Enter 1!"
     sleep(0.25)
     puts "Have a favorite venue? Enter 2 to search by venue!!"
     puts
@@ -182,7 +182,7 @@
       puts
       puts "The Dead played in #{input} on these dates:"
       puts
-      all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.05)}
+      all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.01)}
       puts
       sleep(1.5)
       puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} time(s)."
@@ -190,7 +190,7 @@
     else
       invalid_input
       puts
-      collect_cities.each{|city| puts city; sleep(0.025)}
+      collect_cities.each{|city| puts city; sleep(0.01)}
       puts
       find_shows_by_city
     end
@@ -210,7 +210,7 @@
       puts
       puts "The Dead played at the #{input} on these dates:"
       puts
-      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
+      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.01)}
       puts
       puts "The Dead played the #{venue.name} #{all_shows.length} times."
       sleep(1.5)
@@ -254,11 +254,11 @@
       sleep(1)
       puts
       puts "The Dead played #{input} on these dates:"
-      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.05)}
+      all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.01)}
       puts
       puts "First time played: #{first.strftime("%B %d, %Y")}"
       puts "Last time played: #{last.strftime("%B %d, %Y")}"
-      puts "#{input} was played #{all_shows.length} times in this period."
+      puts "#{input} was played #{all_shows.length} times in total."
       sleep(1.5)
       puts
       puts "Wow, the Dead went IN on that tune!"
