@@ -289,6 +289,7 @@
     puts
     sleep(0.5)
     puts "Crunchy Dead Heads of the world salute you! Thanks for using Deadsetter! See you next time!"
+    bear
     graphic
     puts
   end
@@ -307,7 +308,72 @@
 
 
     graph
-    puts graphic
+    graphic.each_line {|line| puts line; sleep(0.05)}
+  end
+
+  def bear
+    graphic = <<-graph
+                                                                                 `-:::::-`
+                                    ./shdmmmdhs+:`                           -+ydmmmNNNd/
+                                  .sdNNmy/.```.:ohh:       ```````        .+hy+-.``.-/odmds-
+                                   -hNs. `.-.`   `:yhsyhhhyyyyyyyhhhys+:-sd+.  ./++:`  `sNNmy`
+                                  :mNo `smmmmmho.   .-.```        ```.:+sy.  /hmNNNmm/  `md+so
+                                 .mNm` oNNNNNNNms                           sNNNNNNNNm   hh
+                                 +mym` sNNNNNNh-                            `/hNNNNNNs  .mh
+                                 :-:Ns `sNNNNo`                               `:hmds-  -hNs
+                                   -NNh- -oho         +dd`         :hs`         `.` ./ymsh.
+                                   `mNNmy:``          /o/          .oy`           :hmNm: `
+                                    +y-dNmds.              /yhhy/                :mo.y:
+                                       -hmymo             :ddddNm+              +mo  `
+                              .`      `s+/./my:`           ````.-`            -yd+
+                     `        :h+.     dNmdyhhsys/`   :o+:..:o+-.```.      ./ys/`
+                     -hs/:-.```:hmy/-` sNNms:` `-od+   +NmmmmNNmmdds.  ./oso:.
+                     `/mNmmmdddhdNNNmdydNNh/`     om/  `dNNNNNNNNNy`   yNd-
+                 `-+ydmdys+/:--.--:/omNNd/`        yd.  -dNNNNNNNy`  `shohdo.
+              `:sdmNds:`           :hdmmmdhs       `yh.  .ohdmmh+`  .yy` `-sdo-`
+             .ymNNNs.              ``...oNh-        `oh:   `...`  .+do`  `:+dhs-
+             -:dNNh`                  `smNo++///:     -sy+-.```./shy-    `smd:
+              oNNN:                   +ysoo++yNm/       .:+ooooo+:.       `/mms`
+             .mNNN.                        `/dy-                        .ydso/-`
+             oNNNN-            .:+o+/:.   :hmo`                          :mo`
+             ydooN+          :ydy/::/oyyosmdmhyyys+`                 ossosdNh+/::--...```
+             .`  dh        `smy.      `:Nm+.....:Nd`                 hm--sNs///+++++oooooooo+/-.`
+                `hd        smo        `yd:      sN/`-oy-        `s/  :N/ `hh`            ``.-:+syyo:`
+       `.-----:/yNh       :ms        .hy.      -mNyysomd` `o+   /Nmy-`yd. /N:      ````...--::-..-ohh:
+     `+hhysoo+oo+/.      `dd`       -hs`       ods:.  +Ny`sNm:  ym+ydyyNy `mo    `ydhdddmmmNNNmmd/ `om/
+    .hd/.                +m/       :do         .`      sNymshd- yd  .:oyd+`mo     +yhmNNNNNNNNNNNh   dm`
+    yN:                 :ms       +ms                  `hNd`.dd-hy      ..:Ny       `.:+yhdmmNmmy-  `md
+    sN/               .oms`     `omh`                   .ho  .hmms        sNdso/:..`     `.--:-.`  -hd-
+    `yd+.`         `.ohh:       sNN:                     ``   `oms       `md.`.-:/oooo+//:------:+sho.
+      :ossoo+////+oyyo-        +NNm                             .-       om:        `.--:/++oooo+/-`
+         `-:/++++/:.`         .mNNh                                     -md
+                              +Nhhd                         :`         -dNN/
+                              o+`ym.                        +s`       :ds/mm-
+                              ` -NNy`                       /No     `od+  -dd.
+                                +NNNs`                      :Nm.   :hd-    -dd.
+                                +Nmhms                      /NN+ .sms.      -dh.
+                                .h- -do                     oNNhodh:         .hd-
+                                     -m.                   `dNNNd:            `ym/
+                                     :m-                   oNNmhmy.            `sms`
+                                   .+my                   /mNNo +mmo.            omd/`
+                                 -smNd`                 `omNNh   yNNd/            :hmy:``  ```.-:/+++-
+                               `sdhmm-                `/hNNNm-   -mydNy.            :sddhysyyhyo+/::ods`
+                               --:ym/               .+dNmmNNo     / :NNm/             `--::-.`       -my
+                               /hNNo             `:ymNNd:yms        .NNNmo`                          `ds
+                             .yNNNy           `-ohmNNmy..d+         `mdymNs`                       `/hy`
+                            `hhyNm.          :yy/-ymh/  -.           /. .hNy               ``-:/+osyo:
+                            `. :No         `yy.  -:.                     `dN+           `/shys+:-.`
+                               sm.         +ms-.```                       .dd.        `ods-`
+                               dd           .:oyyyyyo-`                    -my       :dh-
+                              `md                   -yd:                    -dy.  `:ym+`
+                               dm:                   -Nd                     `odyhdy/`
+                               :dmhooosssssooo++//::+dd:                        ..
+                                 .-:::-.`````.-::///:.
+
+    graph
+    graphic.each_line {|line| puts line; sleep(0.05)}
+    # puts graphic
+    sleep(2)
   end
 
   def deadsetter
