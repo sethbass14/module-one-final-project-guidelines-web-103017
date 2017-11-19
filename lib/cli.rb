@@ -1,4 +1,5 @@
   def welcome
+    system('clear')
     graphic
     puts "Welcome to Deadsetter, your one-stop shop for every Grateful Dead setlist from 1965-1995."
     sleep(1)
@@ -59,8 +60,8 @@
     puts
     puts "Select '1' if you know what killer show you'd like to look up. Select '2' if you want to browse by far out year!"
     puts
-    puts "1. Search by Date"
-    puts "2. Browse by year"
+    puts "1. Date"
+    puts "2. Year"
   end
 
   def year_prompt
@@ -99,10 +100,12 @@
       show = Show.where(date: date).first
       venue = show.venue
       set = show.songs.collect {|song| song.name }
+      puts
       puts "On this day in the history of the Grateful Dead, the Dead played #{venue.name} in #{venue.city.name}."
       sleep(2)
       puts
       puts "Check out this heady setlist:"
+      puts
       sleep(2)
       set.each {|song| puts song; sleep(0.2)}
       sleep(1)
@@ -140,7 +143,7 @@
 
   def location_menu
     puts
-    puts "What cities did the boys play? Enter 1!"
+    puts "Did the Dead play in your city?? Enter 1 to find out!!"
     sleep(0.25)
     puts "Have a favorite venue? Enter 2 to search by venue!!"
     puts
@@ -181,10 +184,11 @@
     if collect_cities.include?(input)
       city = City.where(name: input).first
       all_shows = city.venues.collect{|venue| venue.shows}.flatten
+      sorted_shows = all_shows.sort_by{|inst| inst.date}
       puts
       puts "The Dead played in #{input} on these dates:"
       puts
-      all_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.01)}
+      sorted_shows.each{|show| puts show.date.strftime("%B %d, %Y"); sleep(0.01)}
       puts
       sleep(1.5)
       puts "Wow #{city.name} LOVES the Dead! They played there #{all_shows.length} time(s)."
@@ -208,9 +212,9 @@
     input = gets_input.split(' ').collect {|word| word.capitalize}.join(" ")
     if collect_venues.include?(input)
       venue = Venue.where(name: input).first
-      all_shows = venue.shows.collect{|show| show.date}
+      all_shows = venue.shows.collect{|show| show.date}.sort
       puts
-      puts "The Dead played at the #{input} on these dates:"
+      puts "The Dead played at the #{input} in #{venue.city.name} on these dates:"
       puts
       all_shows.each{|show| puts show.strftime("%B %d, %Y"); sleep(0.01)}
       puts
@@ -287,6 +291,7 @@
   end
 
   def exit_message
+    system('clear')
     puts
     sleep(0.5)
     puts "Crunchy Dead Heads of the world salute you! Thanks for using Deadsetter! See you next time!"
@@ -307,13 +312,13 @@
 | (__/  )| (____/\\| )   ( || (__/  )/\\____) || (____/\\   | |      | |   | (____/\\| ) \\ \\__
 (______/ (_______/|/     \\|(______/ \\_______)(_______/   )_(      )_(   (_______/|/   \\__/
 
-
     graph
     graphic.each_line {|line| puts line; sleep(0.05)}
   end
 
   def bear
     graphic = <<-graph
+
                                                                                  `-:::::-`
                                     ./shdmmmdhs+:`                           -+ydmmmNNNd/
                                   .sdNNmy/.```.:ohh:       ```````        .+hy+-.``.-/odmds-
