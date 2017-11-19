@@ -58,6 +58,7 @@
   def year_date_menu
     puts
     puts "Select '1' if you know what killer show you'd like to look up. Select '2' if you want to browse by far out year!"
+    puts
     puts "1. Search by Date"
     puts "2. Browse by year"
   end
