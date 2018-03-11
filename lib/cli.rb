@@ -11,7 +11,12 @@
     sleep(2)
   end
 
-  def spaced_out
+  def spaced_out_date
+    puts "We're too spaced out to read your date, brah."
+    find_show_by_date
+  end
+
+  def spaced_out_year
     puts "We're too spaced out to read your date, brah."
     find_shows_by_year
   end
@@ -113,7 +118,7 @@
       puts "Ahhhh, I can hear the music play!"
       main_prompt
     else
-      spaced_out
+      spaced_out_date
     end
   end
 
@@ -137,7 +142,7 @@
       puts "Music never stopped in #{input}!! The Dead played #{shows.length} times."
       find_show_by_date
     else
-      spaced_out
+      spaced_out_year
     end
   end
 
